@@ -1,0 +1,8 @@
+.custom_top_card {
+  background-image: linear-gradient(to right, #4e6e81, #2e3840);
+}
+.custom_card_design {
+  border-left: 3px solid #2e3840;
+  border-bottom: 3px solid #2e3840;
+  border-radius: 5px;
+}

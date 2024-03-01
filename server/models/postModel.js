@@ -14,7 +14,8 @@ const postSchema = new mongoose.Schema({
     required: true,
   },
   blog_image: {
-    type: String,
+    data: Buffer,
+    contentType: String,
   },
   createdAt: {
     type: Date,

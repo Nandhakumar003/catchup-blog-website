@@ -6,6 +6,8 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import postRouter from "./routers/postRouter.js";
+import getRouter from "./routers/FindBlogRouter.js";
+import deleteRouter from "./routers/deleteRouter.js";
 
 dotenv.config();
 
@@ -21,6 +23,8 @@ app.use(bodyParser.json());
 const PORT = process.env.PORT;
 
 app.use("/api/v1", postRouter);
+app.use("/api/v1", getRouter);
+app.use("/api/v1", deleteRouter);
 
 const url = process.env.DB_URL;
 

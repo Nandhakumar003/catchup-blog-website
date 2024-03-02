@@ -29,6 +29,7 @@ function reducer(state, { type, payload }) {
 
 function useFetch(url) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   useEffect(() => {
     dispatch({ type: ACTIONS.API_REQUEST });
     axios
@@ -40,7 +41,20 @@ function useFetch(url) {
         dispatch({ type: ACTIONS.ERROR, payload: e.error });
       });
   }, [url]);
-  return state;
+
+  const reFetch = () => {
+    dispatch({ type: ACTIONS.API_REQUEST });
+    axios
+      .get(url)
+      .then((res) => {
+        dispatch({ type: ACTIONS.FETCH_DATA, payload: res.data });
+      })
+      .catch((e) => {
+        dispatch({ type: ACTIONS.ERROR, payload: e.error });
+      });
+  };
+
+  return { ...state, reFetch };
 }
 
 export default useFetch;

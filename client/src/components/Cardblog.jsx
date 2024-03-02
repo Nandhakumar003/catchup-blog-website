@@ -2,24 +2,37 @@ import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { Buffer } from "buffer";
 import "../pages/Home.css";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
-const BASE_URL = "http://localhost:8080/api/v1/getBlog";
+const GET_BASE_URL = "http://localhost:8080/api/v1/getBlog";
+const DELETE_BASE_URL = "http://localhost:8080/api/v1/deleteOne/";
 
-const Cardblog = () => {
-  const { data, loading, error } = useFetch(BASE_URL);
+const Cardblog = ({ onDelete }) => {
+  const { data, loading, error, reFetch } = useFetch(GET_BASE_URL);
 
-  console.log(data);
-  console.log(loading);
-  console.log(error);
-
-  const handleDelete = (id) => {
-    console.log(id + "Deleted");
+  const handledelete = (id) => {
+    const toastId = toast.loading("Waiting...");
+    axios
+      .delete(`${DELETE_BASE_URL}${id}`)
+      .then((res) => {
+        toast.success("Deleted...");
+        console.log(res);
+        toast.dismiss(toastId);
+        reFetch();
+        onDelete();
+      })
+      .catch((err) => {
+        toast.error("Something wrong!");
+        console.log(err);
+      });
   };
 
   return (
     <section className="container mt-2">
       <div className="row mb-2">
         {loading && <div>Loading...</div>}
+        {error && <div>Loading...</div>}
         {data &&
           data.map((list) => (
             <div className="col-md-6" key={list._id}>
@@ -47,7 +60,7 @@ const Cardblog = () => {
                     <Link
                       to="/"
                       onClick={() => {
-                        handleDelete(list._id);
+                        handledelete(list._id);
                       }}
                       className="nav-link"
                     >
@@ -58,7 +71,7 @@ const Cardblog = () => {
                 <div className="col-auto d-none d-md-block">
                   <img
                     src={`data:${
-                      list.blog_image.contentType
+                      list.blog_image?.contentType
                     };base64,${Buffer.from(
                       list.blog_image.data?.data,
                       "binary"
@@ -72,6 +85,7 @@ const Cardblog = () => {
             </div>
           ))}
       </div>
+      <Toaster />
     </section>
   );
 };

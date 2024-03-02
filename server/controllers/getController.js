@@ -25,4 +25,16 @@ const getDataOne = async (req, res) => {
   }
 };
 
-export { getDataAll, getDataOne };
+const getFindOneDetail = async (req, res) => {
+  try {
+    let getfindOneDetails = await postModel.findOne({ _id: req.params.id });
+
+    console.log(getfindOneDetails);
+
+    res.status(200).json({ status: "Success", data: getfindOneDetails });
+  } catch (err) {
+    res.status(500).json({ status: "Failed", message: err.message });
+  }
+};
+
+export { getDataAll, getDataOne, getFindOneDetail };

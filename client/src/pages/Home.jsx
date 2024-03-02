@@ -6,11 +6,16 @@ import useFetch from "../hooks/useFetch";
 const BASE_URL = "http://localhost:8080/api/v1/getlatestOne";
 
 const Home = () => {
-  const { data, loading, error } = useFetch(BASE_URL);
+  const { data, loading, error, reFetch } = useFetch(BASE_URL);
 
   console.log(data);
   console.log(loading);
   console.log(error);
+
+  const checkStatus = () => {
+    console.log("Calling");
+    reFetch();
+  };
 
   return (
     <div>
@@ -41,9 +46,11 @@ const Home = () => {
         </div>
       )}
 
-      <h2 className="text-center">Latest Blog</h2>
+      <h2 className="text-center">
+        <u>Latest Blog</u>
+      </h2>
 
-      <Cardblog />
+      <Cardblog onDelete={checkStatus} />
     </div>
   );
 };

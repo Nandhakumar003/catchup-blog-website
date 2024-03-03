@@ -24,7 +24,7 @@ const EditBlog = () => {
     const toastId = toast.loading("Fetching Data...");
     try {
       const getData = await axios.get(
-        `http://localhost:8080/api/v1/getfindOneDetail/${id}`
+        `https://catchup-blog-website.onrender.com/api/v1/getfindOneDetail/${id}`
       );
 
       setBtitle(getData?.data.data.blog_title);
@@ -54,7 +54,10 @@ const EditBlog = () => {
     };
 
     axios
-      .patch(`http://localhost:8080/api/v1/updatePost/${id}`, formUpdateData)
+      .patch(
+        `https://catchup-blog-website.onrender.com/api/v1/updatePost/${id}`,
+        formUpdateData
+      )
       .then((res) => {
         if (res.status == 200) {
           console.log("File Updated success");

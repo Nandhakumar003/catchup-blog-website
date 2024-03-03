@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import postRouter from "./routers/postRouter.js";
 import getRouter from "./routers/FindBlogRouter.js";
 import deleteRouter from "./routers/deleteRouter.js";
+import updateRouter from "./routers/updateRouter.js";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ const PORT = process.env.PORT;
 app.use("/api/v1", postRouter);
 app.use("/api/v1", getRouter);
 app.use("/api/v1", deleteRouter);
+app.use("/api/v1", updateRouter);
 
 const url = process.env.DB_URL;
 

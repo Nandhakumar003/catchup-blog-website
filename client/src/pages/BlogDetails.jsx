@@ -51,7 +51,7 @@ const BlogDetails = () => {
               <small className="text-muted">{data.updatedAt}</small>
             </p>
           </div>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-evenly">
             <Link to={`/blog/edit/${data._id}`} className="nav-link">
               Edit
             </Link>

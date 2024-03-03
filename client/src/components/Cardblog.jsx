@@ -5,8 +5,9 @@ import "../pages/Home.css";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-const GET_BASE_URL = "http://localhost:8080/api/v1/getBlog";
-const DELETE_BASE_URL = "http://localhost:8080/api/v1/deleteOne/";
+const GET_BASE_URL = "https://catchup-blog-website.onrender.com/api/v1/getBlog";
+const DELETE_BASE_URL =
+  "https://catchup-blog-website.onrender.com/api/v1/deleteOne/";
 
 const Cardblog = ({ onDelete }) => {
   const { data, loading, error, reFetch } = useFetch(GET_BASE_URL);

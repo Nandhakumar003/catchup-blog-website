@@ -18,7 +18,10 @@ const CreatePost = () => {
     formData.append("blog_category", bcat);
     formData.append("blog_image", bimg);
     axios
-      .post("http://localhost:8080/api/v1/createPost", formData)
+      .post(
+        "https://catchup-blog-website.onrender.com/api/v1/createPost",
+        formData
+      )
       .then((res) => {
         if (res.status == 200) {
           console.log("File Updated success");

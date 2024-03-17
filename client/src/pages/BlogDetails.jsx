@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
+const LocalServer = "http://localhost:8080";
+
 const BASE_URL =
+  `${LocalServer}/api/v1/getfindOneDetail/` ||
   "https://catchup-blog-website.onrender.com/api/v1/getfindOneDetail/";
 const DELETE_BASE_URL =
+  `${LocalServer}/api/v1/deleteOne/` ||
   "https://catchup-blog-website.onrender.com/api/v1/deleteOne/";
 
 const BlogDetails = () => {
@@ -36,38 +40,46 @@ const BlogDetails = () => {
 
   return (
     <div className="container">
-      {data && Object.keys(data).length != 0 && (
-        <div className="card mb-3">
-          <img
-            src={`data:${data.blog_image?.contentType};base64,${Buffer.from(
-              data.blog_image.data?.data,
-              "binary"
-            ).toString("base64")}`}
-            className="card-img-top"
-            alt="..."
-          />
-          <div className="card-body">
-            <h5 className="card-title">{data.blog_title}</h5>
-            <p className="card-text">{data.blog_description}</p>
-            <p className="card-text">
-              <small className="text-muted">{data.updatedAt}</small>
-            </p>
-          </div>
-          <div className="d-flex justify-content-evenly">
-            <Link to={`/blog/edit/${data._id}`} className="nav-link">
-              Edit
-            </Link>
-            <Link
-              onClick={() => {
-                handledelete(data._id);
-              }}
-              className="nav-link"
-            >
-              Delete
-            </Link>
-          </div>
-        </div>
-      )}
+      <div className="row mt-4">
+        {data && Object.keys(data).length != 0 && (
+          <>
+            <div className="col-md-4 col-12">
+              <img
+                src={`data:${data.blog_image?.contentType};base64,${Buffer.from(
+                  data.blog_image.data?.data,
+                  "binary"
+                ).toString("base64")}`}
+                className="card-img-top"
+                alt="..."
+              />
+            </div>
+            <div className="col-md-8 col-12">
+              <div className="card-body">
+                <h5 className="card-title">{data.blog_title}</h5>
+                <p className="card-text">{data.blog_description}</p>
+                <p className="card-text">
+                  <small className="text-muted">{data.updatedAt}</small>
+                </p>
+              </div>
+            </div>
+            <div className="col-md-4 col-12">
+              <div className="d-flex justify-content-evenly">
+                <Link to={`/blog/edit/${data._id}`} className="nav-link">
+                  Edit
+                </Link>
+                <Link
+                  onClick={() => {
+                    handledelete(data._id);
+                  }}
+                  className="nav-link"
+                >
+                  Delete
+                </Link>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
       <Toaster />
     </div>
   );

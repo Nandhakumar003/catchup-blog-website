@@ -5,13 +5,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-const LocalServer = "http://localhost:8080";
-
 const BASE_URL =
-  `${LocalServer}/api/v1/getfindOneDetail/` ||
   "https://catchup-blog-website.onrender.com/api/v1/getfindOneDetail/";
 const DELETE_BASE_URL =
-  `${LocalServer}/api/v1/deleteOne/` ||
   "https://catchup-blog-website.onrender.com/api/v1/deleteOne/";
 
 const BlogDetails = () => {

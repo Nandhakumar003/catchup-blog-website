@@ -1,10 +1,8 @@
 import { useRef, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-const LocalServer = "http://localhost:8080";
 
 const POST_CREATE_URL =
-  `${LocalServer}/api/v1/createPost` ||
   "https://catchup-blog-website.onrender.com/api/v1/createPost";
 
 const CreatePost = () => {

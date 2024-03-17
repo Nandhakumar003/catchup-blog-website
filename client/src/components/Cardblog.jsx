@@ -5,13 +5,8 @@ import "../pages/Home.css";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-const LocalServer = "http://localhost:8080";
-
-const GET_BASE_URL =
-  `${LocalServer}/api/v1/getBlog` ||
-  "https://catchup-blog-website.onrender.com/api/v1/getBlog";
+const GET_BASE_URL = "https://catchup-blog-website.onrender.com/api/v1/getBlog";
 const DELETE_BASE_URL =
-  `${LocalServer}/api/v1/deleteOne/` ||
   "https://catchup-blog-website.onrender.com/api/v1/deleteOne/";
 
 const Cardblog = ({ onDelete }) => {

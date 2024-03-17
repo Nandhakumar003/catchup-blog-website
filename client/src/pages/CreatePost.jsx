@@ -1,6 +1,11 @@
 import { useRef, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+const LocalServer = "http://localhost:8080";
+
+const POST_CREATE_URL =
+  `${LocalServer}/api/v1/createPost` ||
+  "https://catchup-blog-website.onrender.com/api/v1/createPost";
 
 const CreatePost = () => {
   const [btitle, setBtitle] = useState("");
@@ -18,10 +23,7 @@ const CreatePost = () => {
     formData.append("blog_category", bcat);
     formData.append("blog_image", bimg);
     axios
-      .post(
-        "https://catchup-blog-website.onrender.com/api/v1/createPost",
-        formData
-      )
+      .post(POST_CREATE_URL, formData)
       .then((res) => {
         if (res.status == 200) {
           console.log("File Updated success");

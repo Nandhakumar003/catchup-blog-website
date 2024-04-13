@@ -71,12 +71,7 @@ const Cardblog = ({ onDelete }) => {
                 </div>
                 <div className="col-auto d-none d-md-block">
                   <img
-                    src={`data:${
-                      list.blog_image?.contentType
-                    };base64,${Buffer.from(
-                      list.blog_image.data?.data,
-                      "binary"
-                    ).toString("base64")}`}
+                    src={list.blog_image}
                     className="img-fluid"
                     alt={list.blog_title}
                     style={{ width: "10vw" }}

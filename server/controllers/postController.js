@@ -1,24 +1,21 @@
 import postModel from "../models/postModel.js";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+//import fs from "fs";
+//import path from "path";
+//import { fileURLToPath } from "url";
 
 const createPost = async (req, res) => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.resolve(path.dirname(__filename), "../");
+  console.log("Testing " + req.body.blog_image);
 
-  const { blog_title, blog_description, blog_category } = req.body;
+  //const __filename = fileURLToPath(import.meta.url);
+  //const __dirname = path.resolve(path.dirname(__filename), "../");
+
+  const { blog_title, blog_description, blog_category, blog_image } = req.body;
   try {
     const postData = new postModel({
       blog_title: blog_title,
       blog_description: blog_description,
       blog_category: blog_category,
-      blog_image: {
-        data: fs.readFileSync(
-          path.join(__dirname + "/public/images/" + req.file.filename)
-        ),
-        contentType: req.file.mimetype,
-      },
+      blog_image: blog_image,
     });
 
     await postData.save();

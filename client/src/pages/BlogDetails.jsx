@@ -40,14 +40,7 @@ const BlogDetails = () => {
         {data && Object.keys(data).length != 0 && (
           <>
             <div className="col-md-4 col-12">
-              <img
-                src={`data:${data.blog_image?.contentType};base64,${Buffer.from(
-                  data.blog_image.data?.data,
-                  "binary"
-                ).toString("base64")}`}
-                className="card-img-top"
-                alt="..."
-              />
+              <img src={data.blog_image} className="card-img-top" alt="..." />
             </div>
             <div className="col-md-8 col-12">
               <div className="card-body">

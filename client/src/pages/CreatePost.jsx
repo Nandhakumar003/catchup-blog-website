@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
+//https://catchup-blog-website.onrender.com
+
 const POST_CREATE_URL =
   "https://catchup-blog-website.onrender.com/api/v1/createPost";
 
@@ -9,25 +11,41 @@ const CreatePost = () => {
   const [btitle, setBtitle] = useState("");
   const [bdesc, setBdesc] = useState("");
   const [bcat, setBcat] = useState("");
-  const [bimg, setBimg] = useState("");
+  const [base64img, setBase64img] = useState("");
   const imgRef = useRef();
+
+  const converttoBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (err) => {
+        reject(err);
+      };
+    });
+  };
 
   const handleSubmit = (e) => {
     const toastId = toast.loading("Waiting...");
-    const formData = new FormData();
 
-    formData.append("blog_title", btitle);
-    formData.append("blog_description", bdesc);
-    formData.append("blog_category", bcat);
-    formData.append("blog_image", bimg);
+    const formDataobj = {
+      blog_title: btitle,
+      blog_description: bdesc,
+      blog_category: bcat,
+      blog_image: base64img,
+    };
+
     axios
-      .post(POST_CREATE_URL, formData)
+      .post(POST_CREATE_URL, formDataobj)
       .then((res) => {
         if (res.status == 200) {
           console.log("File Updated success");
           setBtitle("");
           setBdesc("");
           setBcat("");
+          setBase64img("");
           imgRef.current.value = "";
           toast.dismiss(toastId);
           toast.success("Data Saved");
@@ -35,7 +53,7 @@ const CreatePost = () => {
       })
       .catch((err) => {
         imgRef.current.value = "";
-        setBimg("");
+        setBase64img("");
         console.log(err.response.data);
         toast.dismiss(toastId);
         toast.error(err.response.data?.message);
@@ -43,6 +61,12 @@ const CreatePost = () => {
 
     e.preventDefault();
   };
+
+  const handleFileChange = async (e) => {
+    const base64 = await converttoBase64(e.target.files[0]);
+    setBase64img(base64);
+  };
+
   return (
     <div className="container mt-3">
       <h4>Create Post</h4>
@@ -102,7 +126,7 @@ const CreatePost = () => {
             className="form-control"
             type="file"
             id="formFile"
-            onChange={(e) => setBimg(e.target.files[0])}
+            onChange={(e) => handleFileChange(e)}
             ref={imgRef}
             accept="image/*"
           />

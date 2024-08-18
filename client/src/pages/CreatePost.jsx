@@ -7,6 +7,8 @@ import toast, { Toaster } from "react-hot-toast";
 const POST_CREATE_URL =
   "https://catchup-blog-website.onrender.com/api/v1/createPost";
 
+/*const POST_CREATE_URL = "http://localhost:8080/api/v1/createPost";*/
+
 const CreatePost = () => {
   const [btitle, setBtitle] = useState("");
   const [bdesc, setBdesc] = useState("");

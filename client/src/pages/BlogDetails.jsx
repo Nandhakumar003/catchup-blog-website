@@ -10,6 +10,9 @@ const BASE_URL =
 const DELETE_BASE_URL =
   "https://catchup-blog-website.onrender.com/api/v1/deleteOne/";
 
+/*const BASE_URL = "http://localhost:8080/api/v1/getfindOneDetail/";
+const DELETE_BASE_URL = "http://localhost:8080/api/v1/deleteOne/";*/
+
 const BlogDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();

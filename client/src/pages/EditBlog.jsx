@@ -3,6 +3,14 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 
+const GET_DETAILS =
+  "https://catchup-blog-website.onrender.com/api/v1/getfindOneDetail";
+const UPDATE_POST =
+  "https://catchup-blog-website.onrender.com/api/v1/updatePost";
+
+/*  const GET_DETAILS = "http://localhost:8080/api/v1/getfindOneDetail";
+const UPDATE_POST = "http://localhost:8080/api/v1/updatePost";*/
+
 const EditBlog = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -23,9 +31,7 @@ const EditBlog = () => {
     console.log("UseEffect" + id);
     const toastId = toast.loading("Fetching Data...");
     try {
-      const getData = await axios.get(
-        `https://catchup-blog-website.onrender.com/api/v1/getfindOneDetail/${id}`
-      );
+      const getData = await axios.get(`${GET_DETAILS}/${id}`);
 
       setBtitle(getData?.data.data.blog_title);
       setBdesc(getData?.data.data.blog_description);
@@ -54,10 +60,7 @@ const EditBlog = () => {
     };
 
     axios
-      .patch(
-        `https://catchup-blog-website.onrender.com/api/v1/updatePost/${id}`,
-        formUpdateData
-      )
+      .patch(`${UPDATE_POST}/${id}`, formUpdateData)
       .then((res) => {
         if (res.status == 200) {
           console.log("File Updated success");

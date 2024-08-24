@@ -5,14 +5,11 @@ import { client } from "../cache.js";
 //import { fileURLToPath } from "url";
 
 const createPost = async (req, res) => {
-  console.log("Testing " + req.body.blog_image);
-
   //const __filename = fileURLToPath(import.meta.url);
   //const __dirname = path.resolve(path.dirname(__filename), "../");
 
   const { blog_title, blog_description, blog_category, blog_image } = req.body;
 
-  console.log(client);
   try {
     const postData = new postModel({
       blog_title: blog_title,
@@ -26,7 +23,7 @@ const createPost = async (req, res) => {
       if (err) {
         console.log(err);
       }
-      console.log(reply);
+      console.log("Redis Data Created" + reply);
     });
 
     res.status(200).json({ status: "Success", data: postData });

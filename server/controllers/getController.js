@@ -3,7 +3,7 @@ import postModel from "../models/postModel.js";
 const getDataAll = async (req, res) => {
   try {
     let getAllblogs = await postModel.find({}).sort({ createdAt: -1 });
-    console.log(getAllblogs);
+    //console.log(getAllblogs);
 
     res.status(200).json({ status: "Success", data: getAllblogs });
   } catch (err) {
@@ -17,7 +17,7 @@ const getDataOne = async (req, res) => {
       .findOne({})
       .sort({ createdAt: -1 })
       .limit(1);
-    console.log(getlatestOne);
+    //console.log(getlatestOne);
 
     res.status(200).json({ status: "Success", data: getlatestOne });
   } catch (err) {
@@ -29,7 +29,7 @@ const getFindOneDetail = async (req, res) => {
   try {
     let getfindOneDetails = await postModel.findOne({ _id: req.params.id });
 
-    console.log(getfindOneDetails);
+    //console.log(getfindOneDetails);
 
     res.status(200).json({ status: "Success", data: getfindOneDetails });
   } catch (err) {

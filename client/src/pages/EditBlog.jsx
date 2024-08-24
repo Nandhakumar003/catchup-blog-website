@@ -8,7 +8,7 @@ const GET_DETAILS =
 const UPDATE_POST =
   "https://catchup-blog-website.onrender.com/api/v1/updatePost";
 
-/*  const GET_DETAILS = "http://localhost:8080/api/v1/getfindOneDetail";
+/*const GET_DETAILS = "http://localhost:8080/api/v1/getfindOneDetail";
 const UPDATE_POST = "http://localhost:8080/api/v1/updatePost";*/
 
 const EditBlog = () => {

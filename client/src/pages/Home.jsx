@@ -5,7 +5,8 @@ import useFetch from "../hooks/useFetch";
 
 const BASE_URL =
   "https://catchup-blog-website.onrender.com/api/v1/getlatestOne";
-/*const BASE_URL = "http://localhost:8080/api/v1/getlatestOne";*/
+
+/*  const BASE_URL = "http://localhost:8080/api/v1/getlatestOne";*/
 
 const Home = () => {
   const { data, loading, error, reFetch } = useFetch(BASE_URL);

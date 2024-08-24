@@ -1,4 +1,5 @@
 import postModel from "../models/postModel.js";
+import { client } from "../cache.js";
 
 const deleteOne = async (req, res) => {
   try {
@@ -6,7 +7,12 @@ const deleteOne = async (req, res) => {
 
     if (checkthedata) {
       let deleteOne = await postModel.findOneAndDelete({ _id: req.params.id });
-      console.log(deleteOne);
+
+      client.del(deleteOne.id, function (err, response) {
+        if (err) throw err;
+        console.log("Redis Response :" + response);
+      });
+
       res
         .status(200)
         .json({ status: "Success", data: "Successfully Deleted!" });

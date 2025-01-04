@@ -2,7 +2,7 @@ import { createClient } from "redis";
 
 //upstash Connection;
 const client = createClient({
-  url: "rediss://default:Ad0eAAIjcDE2ZmVjZWZjMzIwZTI0ZmVjOTg5M2I2OWU0MmI4ZmEyMnAxMA@sweet-stud-56606.upstash.io:6379",
+  url: "rediss://default:AXyQAAIjcDFlODQxNjJhYzliZGE0NjMwYjlmYWYwZjQ3YThjNTllMnAxMA@humble-orca-31888.upstash.io:6379",
   legacyMode: true,
 });
 
